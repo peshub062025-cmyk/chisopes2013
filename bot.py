@@ -6,7 +6,6 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 from threading import Thread
-import os
 
 load_dotenv()
 
