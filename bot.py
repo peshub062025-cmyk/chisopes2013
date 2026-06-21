@@ -4,6 +4,9 @@ from discord import ui
 import pandas as pd
 import os
 from dotenv import load_dotenv
+from flask import Flask
+from threading import Thread
+import os
 
 load_dotenv()
 
@@ -205,5 +208,18 @@ async def help_info(ctx):
     )
     await ctx.reply(embed=embed)
 
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running!"
+
+def run_web():
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 10000))
+    )
+
+Thread(target=run_web).start()
 
 bot.run(TOKEN)
